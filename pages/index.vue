@@ -3,9 +3,18 @@
 </template>
 
 <script>
-import json from "@/assets/products.json";
 export default {
-  name: "products"
+  head: {
+    title: "Shop Lolë",
+    meta: [
+      {
+        hid: "Lole Home page",
+        name: "Shop Lolë",
+        content:
+          "Lolë, Lole, Lole Montreal, Lole Canada, Lole Sale, leggings canada, jackets canada, activewear, canadian label, athlesure, montreal fashion, women's fashion, men's fashion"
+      }
+    ]
+  }
 };
 </script>
 

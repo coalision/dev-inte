@@ -16,11 +16,7 @@
             </div>
           </div>
         </div>
-        <img
-          v-bind:src="product.image"
-          :alt="product.name"
-          class="productimg"
-        />
+        <img :src="product.image" :alt="product.name" class="productimg" />
         <div class="productinfo">
           <h4 class="title">{{ product.title }}</h4>
           <h4 class="price" v-if="!product.discount_price">

@@ -67,17 +67,68 @@
       </div>
       <button class="reset">Reset filters</button>
     </div>
-    <div class="dropdown" v-if="dropVisible" @click="drop">
+    <div class="dropdown" v-if="dropVisible">
+      <fa class="close" :icon="['fas', 'times-circle']" @click="drop" />
+
       <ul class="dropselect">
         <li class="dropgender">Women</li>
         <li class="dropgender">Men</li>
         <li class="dropgender">Us</li>
       </ul>
-      <div class="typeSelect"></div>
-      <div class="sortBy"></div>
-      <div class="tempSelect"></div>
-      <div class="colors"></div>
-      <div class="size"></div>
+      <div class="sidebardiv categorydiv">
+        <h4 class="categoryall category">All ({{ products.length }})</h4>
+        <div v-for="category in categories" :key="category">
+          <h4 class="category">{{ category }}</h4>
+        </div>
+      </div>
+      <div class="sidebardiv">
+        <h4 class="filtertitle">Sort by</h4>
+        <div class="sortradio">
+          <input type="radio" id="featured" name="sortby" value="featured" />
+          <label for="featured">Featured</label><br />
+          <input type="radio" id="highlow" name="sortby" value="highlow" />
+          <label for="highlow">Price high to low</label><br />
+          <input type="radio" id="lowhigh" name="sortby" value="lowhigh" />
+          <label for="lowhigh">Price low to high</label><br />
+        </div>
+      </div>
+      <div class="sidebardiv">
+        <h4 class="filtertitle">Temperature</h4>
+        <div class="tempdiv">
+          <input type="checkbox" id="0+" name="0+" value="0+" />
+          <label for="0+">0&deg;C & plus</label><br />
+          <input type="checkbox" id="0to10" name="0to10" value="0to10" />
+          <label for="0to10">0&deg;C to -10&deg;C</label><br />
+          <input type="checkbox" id="10to20" name="10to20" value="10to20" />
+          <label for="10to20">-10&deg;C to -20&deg;C</label><br />
+          <input type="checkbox" id="20to30" name="20to30" value="20to30" />
+          <label for="20to30">-20&deg;C to -30&deg;C</label><br />
+        </div>
+      </div>
+      <div class="sidebardiv">
+        <h4 class="filtertitle">Colors</h4>
+        <div class="colorsdiv">
+          <div
+            class="colordot"
+            v-for="color in colors"
+            :key="color"
+            :style="{ background: color }"
+          ></div>
+        </div>
+      </div>
+      <div class="sidebardiv">
+        <h4 class="filtertitle">Size</h4>
+        <div class="sizediv">
+          <div class="sizebtn">XS</div>
+          <div class="sizebtn">S</div>
+          <div class="sizebtn">M</div>
+          <div class="sizebtn">L</div>
+          <div class="sizebtn">XL</div>
+          <div class="sizebtn">XXL</div>
+        </div>
+      </div>
+      <button class="btn">Reset filters</button>
+      <button class="btn" @click="drop">Apply</button>
     </div>
   </aside>
 </template>
@@ -107,8 +158,6 @@ export default {
 
       this.colors = [...new Set(this.colors)];
       this.categories = [...new Set(this.categories)];
-
-      console.log(this.colors);
     }
   },
   beforeMount() {
@@ -233,7 +282,7 @@ label {
   background: rgb(235, 235, 235);
 }
 
-.reset {
+.btn {
   background: transparent;
   border: 1px solid #4d4d4f;
   border-radius: 30px;
@@ -279,6 +328,13 @@ label {
     text-align: center;
   }
 
+  .close {
+    font-size: 1.5em;
+    position: absolute;
+    right: 15px;
+    top: 7px;
+  }
+
   .sidewide {
     display: none;
   }
@@ -291,11 +347,12 @@ label {
     background: white;
     width: 100vw;
     display: grid;
+    z-index: 2;
     padding: 20px;
     position: absolute;
     animation: slide 1s ease-in-out;
     top: 80px;
-    grid-template-rows: 60px 100px 100px 100px 100px;
+    grid-template-rows: repeat(auto);
     grid-template-areas:
       "select"
       "type"
@@ -322,6 +379,10 @@ label {
   .dropgender {
     padding: 10px;
     margin: 0 10px;
+  }
+
+  .btn {
+    margin: 15px 20px 5px 20px;
   }
 }
 </style>
