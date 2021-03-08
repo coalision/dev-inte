@@ -1,20 +1,37 @@
 <template>
   <div>
+    <AppHeader />
+    <AppSidebar />
+    <ProductGrid />
+    <AppFooter />
     <Nuxt />
   </div>
 </template>
+<script>
+import AppHeader from "../components/AppHeader";
+import AppSidebar from "../components/AppSidebar";
+import ProductGrid from "../components/ProductGrid";
+import AppFooter from "../components/AppFooter";
+
+export default {
+  components: {
+    AppHeader,
+    AppSidebar,
+    ProductGrid,
+    AppFooter
+  }
+};
+</script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display&display=swap");
+
+* {
+  font-family: "Red Hat Display", sans-serif;
+  color: #4d4d4f;
+  box-sizing: border-box;
+}
 html {
-  font-family:
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
