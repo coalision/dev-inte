@@ -1,3 +1,20 @@
+# Work Completed
+
+layout for desktop and mobile
+data retrieved/ computed for products and filter options
+basic metatagging and accessibility
+transition and keyframes animations
+
+# Learned for Project
+VueJS
+NuxtJS
+
+# Would Add
+Functional Filter options
+further accessibility
+assess performance
+translations
+
 # dev-inte
 ## TEST
 
