@@ -4,20 +4,68 @@
       <fa class="icon" @click="drop" :icon="['fas', 'bars']" />
     </div>
     <div class="categoryPath">
-      <span class="category">Women</span> /
-      <span class="category">New Collection</span> /
-      <span class="category">Packable</span>
+      <span class="path">Women</span> /
+      <span class="path">New Collection</span> /
+      <span class="path">Packable</span>
     </div>
     <div class="collection">
       <div class="collectionTitle">Women's New Collection</div>
       Discover our awesome assortment of women's...
     </div>
     <div class="sidewide">
-      <div class="typeSelect"></div>
-      <div class="sortBy"></div>
-      <div class="tempSelect"></div>
-      <div class="colors"></div>
-      <div class="size"></div>
+      <div class="sidebardiv categorydiv">
+        <h4 class="categoryall category">All ({{ products.length }})</h4>
+        <div v-for="category in categories" :key="category">
+          <h4 class="category">{{ category }}</h4>
+        </div>
+      </div>
+      <div class="sidebardiv">
+        <h4 class="filtertitle">Sort by</h4>
+        <div class="sortradio">
+          <input type="radio" id="featured" name="sortby" value="featured" />
+          <label for="featured">Featured</label><br />
+          <input type="radio" id="highlow" name="sortby" value="highlow" />
+          <label for="highlow">Price high to low</label><br />
+          <input type="radio" id="lowhigh" name="sortby" value="lowhigh" />
+          <label for="lowhigh">Price low to high</label><br />
+        </div>
+      </div>
+      <div class="sidebardiv">
+        <h4 class="filtertitle">Temperature</h4>
+        <div class="tempdiv">
+          <input type="checkbox" id="0+" name="0+" value="0+" />
+          <label for="0+">0&deg;C & plus</label><br />
+          <input type="checkbox" id="0to10" name="0to10" value="0to10" />
+          <label for="0to10">0&deg;C to -10&deg;C</label><br />
+          <input type="checkbox" id="10to20" name="10to20" value="10to20" />
+          <label for="10to20">-10&deg;C to -20&deg;C</label><br />
+          <input type="checkbox" id="20to30" name="20to30" value="20to30" />
+          <label for="20to30">-20&deg;C to -30&deg;C</label><br />
+        </div>
+      </div>
+      <div class="sidebardiv">
+        <h4 class="filtertitle">Colors</h4>
+        <div class="colorsdiv">
+          <div
+            class="colordot"
+            v-for="color in colors"
+            :key="color"
+            :style="{ background: color }"
+          ></div>
+        </div>
+      </div>
+      <div class="sidebardiv">
+        <h4 class="filtertitle">Size</h4>
+        <div class="sizediv">
+          <div class="sizebtn">XS</div>
+          <div class="sizebtn">S</div>
+          <div class="sizebtn">M</div>
+          <div class="sizebtn">L</div>
+          <div class="sizebtn">XL</div>
+          <div class="sizebtn">XXL</div>
+        </div>
+      </div>
+      <button class="reset">Reset filters</button>
     </div>
     <div class="dropdown" v-if="dropVisible" @click="drop">
       <ul class="dropselect">
@@ -42,17 +90,29 @@ export default {
   data() {
     return {
       dropVisible: false,
-      products: json.data
+      products: json.data,
+      colors: [],
+      categories: []
     };
   },
   methods: {
     drop() {
       this.dropVisible = !this.dropVisible;
+    },
+    getProps: function() {
+      for (let i = 0; i < this.products.length; i++) {
+        this.colors.push(...this.products[i].colors);
+        this.categories.push(...this.products[i].categories);
+      }
+
+      this.colors = [...new Set(this.colors)];
+      this.categories = [...new Set(this.categories)];
+
+      console.log(this.colors);
     }
   },
-  mounted: function() {
-    // Checking if everything works, delete this right after you see that everything works
-    console.log(this.products);
+  beforeMount() {
+    this.getProps();
   }
 };
 </script>
@@ -69,23 +129,23 @@ aside {
 .categoryPath {
   font-size: 13px;
   color: rgb(117, 117, 117);
+  margin-left: 12px;
 }
 
-.category {
+.path {
   cursor: pointer;
   margin: 0 7px 0 7px;
   transition: 0.5s ease-in;
 }
 
-.category:hover {
+.path:hover {
   color: black;
   margin: 0 7px 0 9px;
-
   text-decoration: underline;
 }
 
 .collection {
-  margin-top: 20px;
+  margin: 20px 20px 40px 20px;
   font-size: 14px;
 }
 
@@ -96,29 +156,96 @@ aside {
   margin-bottom: 15px;
 }
 
-.typeSelect {
-  background: aqua;
-  height: 100px;
+.filtertitle {
+  margin-bottom: 10px;
+  font-weight: 700;
 }
 
-.sortBy {
-  background: papayawhip;
-  height: 100px;
+input {
+  cursor: pointer;
 }
 
-.tempSelect {
-  background: goldenrod;
-  height: 100px;
+.sidebardiv {
+  height: auto;
+  margin: 20px;
 }
 
-.colors {
-  background: plum;
-  height: 100px;
+.categorydiv {
+  margin-left: 5px;
 }
 
-.size {
-  background: rgb(185, 166, 252);
-  height: 100px;
+.category {
+  font-weight: 400;
+  line-height: 2em;
+  padding: 2px 15px;
+  border-bottom: 1px solid rgb(235, 235, 235);
+  transition: 0.5s ease-in;
+  cursor: pointer;
+}
+
+.category:hover {
+  background: rgb(235, 235, 235);
+}
+.categoryall {
+  font-weight: 700;
+}
+
+.sortradio {
+  line-height: 2em;
+}
+
+.tempdiv {
+  line-height: 2em;
+}
+
+label {
+  margin-left: 10px;
+}
+
+.colorsdiv {
+  display: flex;
+  flex-wrap: wrap;
+  width: 240px;
+  margin-left: -4px;
+}
+
+.sizediv {
+  display: flex;
+  flex-wrap: wrap;
+  width: 240px;
+  margin-left: -4px;
+}
+
+.sizebtn {
+  border: 1px solid rgb(235, 235, 235);
+  text-align: center;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 50px;
+  height: 30px;
+  font-size: 14px;
+  margin: 10px 10px 0 0;
+  padding: 5px;
+  transition: 0.5s ease-in;
+}
+
+.sizebtn:hover {
+  background: rgb(235, 235, 235);
+}
+
+.reset {
+  background: transparent;
+  border: 1px solid #4d4d4f;
+  border-radius: 30px;
+  font-weight: 700;
+  padding: 5px 20px;
+  margin: 20px 20px;
+  cursor: pointer;
+  transition: 0.5s ease-in;
+}
+
+.reset:hover {
+  background: rgb(235, 235, 235);
 }
 
 .hamburger {

@@ -49,10 +49,7 @@ export default {
       products: json.data
     };
   },
-  mounted: function() {
-    // Checking if everything works, delete this right after you see that everything works
-    console.log(this.products);
-  },
+
   methods: {
     hasImage(item) {
       if (
@@ -158,6 +155,7 @@ export default {
   border-radius: 30px;
   margin: 10px;
   opacity: 0.7;
+  border: 1px solid #4d4d4f;
 }
 
 .overlay:hover {
