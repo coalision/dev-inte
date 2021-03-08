@@ -1,6 +1,6 @@
 <template>
   <div>
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
       <div class="info1">
         <ul class="infoul1 infoul">
           <li class="infoHead">About Lol&#235;</li>

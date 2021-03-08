@@ -1,5 +1,5 @@
 <template>
-  <div class="grid">
+  <div class="grid" role="main">
     <div class="product" v-for="product in products" :key="product.id">
       <div v-if="hasImage(product)">
         <div class="overlay">
@@ -20,7 +20,7 @@
         <div class="productinfo">
           <h4 class="title">{{ product.title }}</h4>
           <h4 class="price" v-if="!product.discount_price">
-            $ {{ (product.price / 100).toFixed(2) }}
+            {{ (product.price / 100).toFixed(2) }}
           </h4>
           <div>
             <h4 v-if="product.discount_price" class="discount">

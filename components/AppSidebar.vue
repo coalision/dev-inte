@@ -1,5 +1,5 @@
 <template>
-  <aside class="sidebar">
+  <nav class="sidebar" role="navigation">
     <div class="hamburger">
       <fa class="icon" @click="drop" :icon="['fas', 'bars']" />
     </div>
@@ -130,7 +130,7 @@
       <button class="btn">Reset filters</button>
       <button class="btn" @click="drop">Apply</button>
     </div>
-  </aside>
+  </nav>
 </template>
 
 <script>
@@ -167,7 +167,7 @@ export default {
 </script>
 
 <style>
-aside {
+nav {
   background: white;
   width: 350px;
   height: 400px;

@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header" role="banner">
     <ul class="select">
       <li class="gender">Women</li>
       <li class="gender">Men</li>
@@ -11,7 +11,7 @@
     <div class="menu">
       <img class="flag" width="35px" src="../assets/Flag.jpg" />
 
-      <fa class="icon" :icon="['fas', 'search']" />
+      <fa class="icon" :icon="['fas', 'search']" role="search" />
       <fa class="icon" :icon="['fas', 'user']" />
       <fa class="icon" :icon="['fas', 'shopping-bag']" />
     </div>
